@@ -10,9 +10,9 @@ from arrays import *
 from analysis import *
 
 
-songsfile = open('songsfiles/test/songs.txt', encoding='utf8')
-featuresfile = open('songsfiles/test/features.txt', encoding='utf8')
-albumsfile = open('albumfiles/test/items.txt', encoding='utf8')
+songsfile = open('songsfiles/trial/songs.txt', encoding='utf8')
+featuresfile = open('songsfiles/trial/features.txt', encoding='utf8')
+albumsfile = open('albumfiles/trial/items.txt', encoding='utf8')
 
 s = SongCollection.process_from_file(songsfile)
 f = FeatureCollection.process_from_file(featuresfile)
@@ -22,10 +22,10 @@ songsfile.close()
 featuresfile.close()
 albumsfile.close()
 
-s = TimeRange(2012, 2017, s, f, a)
+s = TimeRange(1956, 2017, s, f, a)
 s.addall(True)
 
-resfile = open('result.txt', 'w', encoding='utf8')
+resfile = open('result1.txt', 'w', encoding='utf8')
 for smallreport in s.getreport(15):
     for line in smallreport:
         resfile.write(line + '\n')

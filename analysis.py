@@ -12,7 +12,7 @@ class TimeRange:
 
     # setting constants
     # number of last years that will be divided into quarters
-    QUARTERYEARSNUM = 5
+    QUARTERYEARSNUM = 50
 
     # endings of quarters ordinals
     ENDINGS = ["st", "nd", "rd", "th"]
