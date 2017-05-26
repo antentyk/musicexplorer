@@ -1,0 +1,19 @@
+ARTIST INFORMATION
+Artist name: Justin Bieber
+Artist id: 1uNFoZAHBGtllmzznpCI3s
+Artist popularity: 92
+_______________________
+
+_______________________
+	Track title: Love Yourself
+	Track id: 50kpGaPAhYJ3sGmk6vplg0
+		Track loudness -9.954
+		Track liveness 0.285
+		Track acousticness 0.856
+		Track speechiness 0.453
+	Track title: Sorry
+	Track id: 09CtPGIpYB4BrO8qb1RGsF
+		Track loudness -3.724
+		Track liveness 0.308
+		Track acousticness 0.0865
+		Track speechiness 0.0476
