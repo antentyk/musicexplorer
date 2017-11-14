@@ -451,6 +451,20 @@ class Feature(MusicItem):
              'time_signature',
              'valence']
 
+    PERCENTAGEDARGS = ['acousticness',
+                       'danceability',
+                       'energy',
+                       'instrumentalness',
+                       'speechiness',
+                       'valence',
+                       'loudness']
+
+    def equal_characteristics(self, other):
+        for item in self.PERCENTAGEDARGS:
+            if abs(self[item] - other[item]) > 0.1:
+                return False
+        return True
+
     def __init__(self,
                  id=0,
                  acousticness=0,

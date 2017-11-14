@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Mogra" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/analyze.css">
+    <link rel="stylesheet" href="../static/checkbox/css/style.css">
+    <meta charset="UTF-8">
+    <script src="../static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <title>Enter your criterias</title>
+</head>
+<body>
+    {% include("header.html") %}
+    <div class="cls"></div>
+    <div id="data">
+        <form id="criterias" onsubmit="return send()" style="color: white">
+            <div id="left">
+            <h2>Type</h2>
+            <select name="time_type" id="time_type" onchange="handle_quarter_year_change()">
+                <option value="years" selected="selected">Years</option>
+                <option value="quarters">Quarters</option>
+            </select>
+            <div class="cls"></div>
+            <div id="quarters_special_div" class="invisible">
+            <h2>Special</h2>
+                <select id="quarters_special" name="quarters_special">
+                    <option value="1">1st</option>
+                    <option value="2">2nd</option>
+                    <option value="3">3rd</option>
+                    <option value="4">4th</option>
+                    <option value="-1" selected="selected">All</option>
+                </select>
+            </div>
+            <div class="cls"></div>
+            <div id="start_year_div" class="invisible">
+                <h2>Start year</h2>
+                <select id="start_year" name="start_year" onchange="handle_end_year()"></select>
+            </div>
+            <div class="cls"></div>
+            <div id="end_year_div" class="invisible">
+                <h2>Finish</h2>
+                <select id="end_year" name="end_year"></select>
+            </div>
+            <div class="cls"></div>
+            <div id="data_type_div">
+                <h2>Type of data</h2>
+                <select id="data_type" name="data_type">
+                    <option value="middle">Middle values</option>
+                    <option value="top">Top values</option>
+                    <option value="min">Minimum values</option>
+                    <option value="max">Maximum values</option>
+                </select>
+            </div>
+            </div>
+            <div id="right">
+            <div id="data_characteristics_div">
+                <h2>Enter characteristics you want to analyze</h2>
+                <div class="cls"></div>
+                <div class="data_characteristics">
+                    <div class="toggle-btn active">
+                        <input name="acousticness" id="acousticness_check" type="checkbox"  checked class="cb-value" />
+                        <span class="round-btn"></span>
+                    </div>
+                    <p class="characteristics_p">Acousticness</p>
+                </div>
+                <div class="cls"></div>
+                <div class="data_characteristics">
+                    <div class="toggle-btn active">
+                        <input name="danceability" id="danceability_check" type="checkbox"  checked class="cb-value" />
+                        <span class="round-btn"></span>
+                    </div>
+                    <p class="characteristics_p">Danceability</p>
+                </div>
+                <div class="cls"></div>
+                <div class="data_characteristics">
+                    <div class="toggle-btn active">
+                        <input name="energy" id="energy_check" type="checkbox"  checked class="cb-value" />
+                        <span class="round-btn"></span>
+                    </div>
+                    <p class="characteristics_p">Energy</p>
+                </div>
+                <div class="cls"></div>
+                <div class="toggle-btn active">
+                    <input name="instrumentalness" id="instrumentalness_check" type="checkbox"  checked class="cb-value" />
+                    <span class="round-btn"></span>
+                </div>
+                <p class="characteristics_p">Instrumentalness</p>
+                <div class="cls"></div>
+
+                <div class="toggle-btn active">
+                    <input name="speechiness" id="speechiness_check" type="checkbox"  checked class="cb-value" />
+                    <span class="round-btn"></span>
+                </div>
+                <p class="characteristics_p">Speechiness</p>
+                <div class="cls"></div>
+
+                <div class="toggle-btn active">
+                    <input name="valence" id="valence_check" type="checkbox"  checked class="cb-value" />
+                    <span class="round-btn"></span>
+                </div>
+                <p class="characteristics_p">Valence</p>
+                <div class="cls"></div>
+
+                <div class="toggle-btn active">
+                    <input name="duration_ms" id="duration_ms_check" type="checkbox"  checked class="cb-value" />
+                    <span class="round-btn"></span>
+                </div>
+                <p class="characteristics_p">Duration</p>
+                <div class="cls"></div>
+
+                <div class="toggle-btn active">
+                    <input name="loudness" id="loudness_check" type="checkbox"  checked class="cb-value" />
+                    <span class="round-btn"></span>
+                </div>
+                <p class="characteristics_p">Loudness</p>
+                <div class="cls"></div>
+                <div class="toggle-btn active">
+                    <input name="tempo" id="tempo_check" type="checkbox"  checked class="cb-value" />
+                    <span class="round-btn"></span>
+                </div>
+                <p class="characteristics_p">Tempo</p>
+                <div class="cls"></div>
+            </div>
+            </div>
+            <div class="cls"></div>
+            <input type="submit" value="Send" id="submitbutton">
+        </form>
+    </div>
+    <div class="cls"></div>
+    <div id="graphs"></div>
+    {% include("footer.html") %}
+    <script src="../static/js/analyze.js"></script>
+    <script src="../static/checkbox/js/index.js"></script>
+</body>
+</html>

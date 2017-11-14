@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Mogra" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/suggest.css">
+    <script src="../static/js/jquery-3.2.1.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Music Suggestion</title>
+</head>
+<body>
+    {% include("header.html") %}
+    <div class="cls"></div>
+    <div id="suggest">
+        <div id="suggestinfo">
+            <h2>Form your playlist</h2>
+            <img id="suggestinfosign" src="../static/photo/plus.png" onclick="change()">
+        </div>
+        <div class="cls"></div>
+        <div id="suggestinfodiv">
+            <p class="suggestinfop">info1</p>
+            <p class="suggestinfop">info2</p>
+            <p class="suggestinfop">info3</p>
+        </div>
+        <div class="cls"></div>
+        <div id="suggestcurrentplaylist">
+            <h2>Find songs on Spotify</h2>
+            <div class="cls"></div>
+            <form id="suggestsearch">
+                <input autocomplete="off" id="suggestsearchfield" onfocus="focusing()" onblur="losefocus()" oninput="valuechange()" type="search" name="query" placeholder="Enter name of the song">
+            </form>
+            <div id="suggestions"></div>
+            <h2>Your current playlist</h2>
+            <div class="cls"></div>
+            <div id="playlist"></div>
+        </div>
+        <div class="cls"></div>
+        <div id="suggestbuttons">
+            <button id="clearbutton" onclick="clear_playlist()">Clear playlist</button>
+            <div class="cls"></div>
+            <button id="findsimilarbutton" onclick="send_playlist()">Find similar/different songs</button>
+        </div>
+        <div class="cls"></div>
+        <div id="suggestedtracks">
+            <img id="loading" src="../static/photo/loading.gif">
+            <div class="cls"></div>
+            <h2 id="similarheader">Similar Music</h2>
+            <div class="cls"></div>
+            <div id="similar"></div>
+            <div class="cls"></div>
+            <h2 id="differentheader">Different Music</h2>
+            <div class="cls"></div>
+            <div id="different"></div>
+        </div>
+    </div>
+    <div class="cls"></div>
+    {% include("footer.html") %}
+</body>
+<script src="../static/js/suggest_show_info.js"></script>
+<script src="../static/js/suggest_search_tracks.js"></script>
+<script src="../static/js/suggest_form_playlist.js"></script>
+<script src="../static/js/suggest_find_similar.js"></script>
+</html>

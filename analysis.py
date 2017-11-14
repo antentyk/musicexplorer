@@ -1,3 +1,6 @@
+import json
+
+
 from musicitem import *
 from collection import *
 from bag import *
@@ -11,18 +14,45 @@ class TimeRange:
     """
 
     # setting constants
-    # number of last years that will be divided into quarters
-    QUARTERYEARSNUM = 50
-
     # endings of quarters ordinals
     ENDINGS = ["st", "nd", "rd", "th"]
+
+    @classmethod
+    def readfromfile(cls,
+                     text,
+                     startyear,
+                     endyear,
+                     songcollection,
+                     featurecollection,
+                     albumcollection,
+                     QUARTERYEARSNUM=15):
+        temp = TimeRange(startyear,
+                         endyear,
+                         songcollection,
+                         featurecollection,
+                         albumcollection,
+                         QUARTERYEARSNUM)
+        i = -1
+        iterator = text.__iter__()
+        for i in range(len(temp._pieces) - temp.QUARTERYEARSNUM):
+            line = iterator.__next__()
+            temp._pieces[i] = TimeDelta.readfromfile(featurecollection, line)
+        for special in range(i + 1, len(temp._pieces)):
+            temp._pieces[special] = Array(4)
+            for quarternum in range(1, 5):
+                line = iterator.__next__()
+                temp._pieces[special][quarternum - 1] = TimeDelta.readfromfile(
+                    featurecollection, line
+                )
+        return temp
 
     def __init__(self,
                  startyear,
                  endyear,
                  songcollection,
                  featurecollection,
-                 albumcollection):
+                 albumcollection,
+                 QUARTERYEARSNUM=15):
         """
         initializes new TimeRange instance as an array
         of TimeDelta instances
@@ -42,6 +72,8 @@ class TimeRange:
                 of the songs that will be analyzed
             albumcollection (AlbumCollection): collection of the albums
                 of the songs that will be analyzed
+            QUARTERYEARSNUM(int): number of last years that will be
+                divided into quarters
 
         if year has wrong type or format, AssertionError is raised
         """
@@ -54,6 +86,7 @@ class TimeRange:
         self._pieces = Array(endyear - startyear + 1)
         self._startyear = startyear
         self._endyear = endyear
+        self.QUARTERYEARSNUM = QUARTERYEARSNUM
         i = -1
         for i in range(len(self._pieces) - self.QUARTERYEARSNUM):
             self._pieces[i] = TimeDelta(str(startyear + i), self._features)
@@ -66,6 +99,8 @@ class TimeRange:
                         " quarter")
                 self._pieces[special][quarternum - 1] = TimeDelta(
                     name, self._features)
+
+
 
     def __iter__(self):
         """
@@ -164,7 +199,7 @@ class TimeRange:
                            reverse=True):
             if printinfo:
                 counter += 1
-                if counter % 100 == 0:
+                if counter % 1000 == 0:
                     print('\rAdding ' + str(counter), end='')
             self._add(item)
 
@@ -205,7 +240,7 @@ class TimeDelta:
              'feature_collection',
              'albums',
              'extreme_nums',
-             '_discrete',
+             'discrete',
              'songs']
 
     def __init__(self,
@@ -241,6 +276,49 @@ class TimeDelta:
             for option in self.DISCRETEARGS[item]:
                 self._discrete[item][option] = 0
         self._songs = DynamicArray(arraysize)
+
+    @classmethod
+    def readfromfile(cls, feature_collection, text):
+        info = json.loads(text)
+        if len(info['songs']) == 0:
+            return None
+        temp = TimeDelta(info['name'], feature_collection, len(info['songs']))
+        temp._middle_feature = Feature.process_from_file(eval(info['middle_feature']))
+        temp._extreme_nums = info['extreme_values']
+        temp._discrete = info['discrete_values']
+        for i in range(len(info['songs'])):
+            tempsong = Song.process_from_file(eval(info['songs'][i]))
+            temp._songs.append(tempsong)
+            temp._all_popularity += tempsong.popularity()
+        return temp
+
+    def savetofile(self, songsnum):
+        """
+        Args:
+            songsnum(int): first songsnum songs will be added
+                to representation of the instance
+
+        Returns:
+             str: json encoded information about
+             TimeDelta instance that will consist of:
+                1) name
+                2) middle_feature
+                3) extreme values
+                4) discrete values
+                5) id of first songs
+        """
+        songsnum = min(songsnum, len(self._songs))
+        result = {}
+        result['name'] = self._name
+        result['middle_feature'] = repr(self._middle_feature)
+        result['extreme_values'] = self._extreme_nums
+        result['discrete_values'] = self._discrete
+        tempsongs = []
+        for i in range(songsnum):
+            tempsongs.append(repr(self._songs[i]))
+        result['songs'] = tempsongs
+        return json.dumps(result)
+
 
     def __getitem__(self, item):
         """
@@ -282,8 +360,7 @@ class TimeDelta:
         self['songs'].binary_insert(song)
 
     def create_middle_feature(self,
-                              n=float('inf'),
-                              allpopularity=None):
+                              n=float('inf')):
         """
         Calculates middle characteristics of n most popular
             songs in this period according to its popularity
@@ -292,18 +369,30 @@ class TimeDelta:
              n (int): number of songs that should be counted
              allpopularity (int): total popularity of the first n songs
         """
-        if allpopularity is None:
+        if n == float('inf'):
             allpopularity = self._all_popularity
+            custom = False
+        else:
+            custom = True
+            allpopularity = 0
+            for i in range(min(n, len(self['songs']))):
+                allpopularity += self['songs'][i].popularity()
         print('finding middle values for %s...' % self._name)
+        temp = Feature()
         counter = 0
         for item in self['songs']:
             counter += 1
             for f in self.NONDISCRETEARGS:
-                self._middle_feature[f] += \
+                temp[f] += \
                     ((item.popularity() * self._feature_collection[item.id()][f])/
                      allpopularity)
             if counter >= n:
                 break
+        if custom:
+            return temp
+        else:
+            self._middle_feature = temp
+
 
     def getk(self, feature):
         """
@@ -321,11 +410,15 @@ class TimeDelta:
         """
         result = 0
         for item in self.PERCENTAGEDARGS:
+            if item == 'speechiness':
+                continue
             result += abs(feature[item] - self._middle_feature[item])
         for item in self.NONPERCENTAGEDARGS:
-            f = self._middle_feature[item]
-            c = feature[item]
-            result += abs(1 - f/c)
+            if item == 'duration_ms':
+                continue
+            f = abs(self._middle_feature[item])
+            c = abs(feature[item])
+            result += abs(1 - min(f, c)/max(f,c))
         return result
 
     def find_closest(self):

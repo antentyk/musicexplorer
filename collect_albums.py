@@ -1,6 +1,6 @@
 # this module is used to get information
 # about most popular albums of the artists
-# that were alredy collected
+# that were already collected
 # it is assumed that you have already collected
 # artists in collect_artsits.py
 # do not collect any extra artists in the folder that you are using

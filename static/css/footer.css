@@ -1,0 +1,21 @@
+#footercopyright{
+    color: white;
+    text-align: center;
+    font-size: 1.2em;
+}
+#footermenu{
+    font-family: 'Abel', sans-serif;
+}
+#footerabout_us, #footercontact_us, #footerdevelopers{
+    text-align: center;
+    width: 15%;
+    min-width: 100px;
+    margin-left: 13.75%;
+    margin-right: 0px;
+    font-size: 1.5em;
+    float: left;
+    color: white;
+}
+.footera{
+    color: white;
+}

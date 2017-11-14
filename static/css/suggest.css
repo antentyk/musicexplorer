@@ -1,0 +1,120 @@
+h2{
+    color: white;
+    font-family: 'Abel', sans-serif;
+    float: left;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+#suggest{
+    width: 95%;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 5%;
+}
+.suggestinfop{
+    color: white;
+    font-family: 'Abel', sans-serif;
+    margin-left: 2%;
+    font-size: 1.2em;
+}
+#suggestinfo{
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+}
+#suggestinfosign{
+    float: left;
+    margin-left: 10px;
+    margin-top: 20px;
+    height: 24px;
+    width: 24px;
+}
+#suggestinfosign:hover{
+    cursor: pointer;
+}
+#suggestinfodiv{
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    display: none;
+}
+#suggestsearch input{
+    width: 230px;
+    box-sizing: border-box;
+    border: 2px solid #282828;
+    border-radius: 15px;
+
+    background-color: white;
+    background-image: url('../photo/search.png');
+    background-size: 24px 24px;
+    background-position: 9px 9px;
+    background-repeat: no-repeat;
+    padding: 12px 0px 12px 45px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    color: grey;
+    margin-left:0px;
+}
+#suggestcurrentplaylist{
+    padding: 0px;
+    margin: 0px;
+    margin-top: 50px;
+}
+.suggestsuggestedsong, .playlistsong{
+    font-family: 'Abel', sans-serif;
+    font-size: 1.2em;
+    color: white;
+    margin-left: 50px;
+}
+.playlistsong{
+    width: 30%;
+    margin-right: 0px;
+    float: left;
+}
+.suggestsuggestedsong:hover{
+    cursor: pointer;
+}
+#playlist, #suggestbuttons{
+    padding: 0px;
+    margin: 0px;
+    width: auto;
+}
+#suggestbuttons{
+    margin-top: 50px;
+}
+#suggestions{
+    margin-bottom: 50px;
+}
+#clearbutton, #findsimilarbutton{
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #282828;
+    font-family: 'Abel', sans-serif;
+    font-size: 1.5em;
+    border-radius: 25px;
+    margin-top: 20px;
+}
+.suggestframediv{
+    float: left;
+}
+#suggestedtracks{
+    padding: 0px;
+    margin: 0px;
+    margin-top: 20px;
+}
+#loading{
+    height: 50px;
+    width: auto;
+    margin-left: 15px;
+    display: none;
+}
+#differentheader, #similarheader{
+    display: none;
+}
+#suggestsearchfield{
+    font-family: 'Abel', sans-serif;
+    font-size: 1.1em;
+}

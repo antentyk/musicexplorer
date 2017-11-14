@@ -1,0 +1,48 @@
+.invisible{
+    display: none;
+}
+#data{
+    padding: 0px;
+    margin: 0px;
+    margin-left: 7%;
+    width: 93%;
+}
+h2{
+    color: white;
+    font-family: 'Abel', sans-serif;
+}
+.characteristics_p{
+    font-family: 'Abel', sans-serif;
+    font-size: 1.2em;
+    float: left;
+    margin-top: 16px;
+}
+#submitbutton{
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: black;
+    font-family: 'Abel', sans-serif;
+    font-size: 1.5em;
+    border-radius: 25px;
+    margin-top: 20px;
+}
+
+select{
+    margin-left: 20px;
+    color: white;
+    background-color: #282828;
+    border: 1px solid white;
+    border-radius: 25px;
+    font-family: 'Abel', sans-serif;
+    font-size: 1.1em;
+    padding: 10px;
+}
+
+#left, #right{
+    float: left;
+    width: 40%;
+    min-width: 230px;
+}

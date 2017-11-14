@@ -220,10 +220,11 @@ class DynamicArray:
         new_elements = self._make_array(capacity)  # new (bigger) array
 
         # Makes a copy of elements
-        for k in range(self._size):
+        for k in range(min(self._size, capacity)):
             new_elements[k] = self._elements[k]
         self._elements = new_elements  # use the bigger array
         self._capacity = capacity
+        self._size = min(capacity, len(self))
 
     def _make_array(self, size):
         """
