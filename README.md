@@ -5,7 +5,7 @@ Web platform that helps you to find the closest songs to your playlist as well a
 <br /><br />
 
 It consists of 2 parts:<br />
-* scripts for <b>scrabbing data</b> using spotify api, form <b>reports</b> and <b>statistics</b>
+* scripts for <b>scrubbing data</b> using spotify api, form <b>reports</b> and <b>statistics</b>
 * scripts for web interface that will help you to find <b>closest and alternative songs</b> to your playlist and form <b>interactive reports</b> on analyzed songs
 
 <br /><br />
