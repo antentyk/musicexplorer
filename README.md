@@ -1,25 +1,28 @@
-# Music Explorer
+<h1>Music Explorer</h1>
 
 
-Web platform that helps you to find the closest songs to
-your playlist as well as the alternative ones.
+Web platform that helps you to find the closest songs to your playlist as well as the alternative ones.
+<br /><br />
 
+It consists of 2 parts:<br />
+* scripts for <b>scrabbing data</b> using spotify api, form <b>reports</b> and <b>statistics</b>
+* scripts for web interface that will help you to find <b>closest and alternative songs</b> to your playlist and form <b>interactive reports</b> on analyzed songs
 
-It consists of 2 parts:
-	- scripts for scrapping data using spotify api, form reports and statistics
-	- scripts for displaying web interface and search for closest and alternative songs
+<br /><br />
 
-
-You can check scrabbing architecture in doc/classdiagram.html
+You can check <b>scrabbing architecture</b> [here](doc/classdiagram.html)<br />
 What it cans:
-	- scrab general information about the most popular artists on Spotify(check collect_artists.py)
-	- scrab general information about the albums of the collected artists(check collect_albums.py)
-	- scrab the general and particular information about the songs in collected albums(check collect_songs.py)
-	- save/load all the data mentioned above
-	- form report on the scrabbed data (check result.txt and result1.txt)
+* scrab general information about the <b>most popular artists on Spotify</b> [usage example](collect_artists.py)
+* scrab general information about the <b>albums</b> of the collected artists [usage example](collect_albums.py)
+* scrab the <b>general and particular information</b> about the <b>songs</b> in collected albums [usage example](collect_songs.py)
+* save/load all the data mentioned above
+* form <b>report</b> on the scrabbed data [possible result](result.txt)
 
-What does the platform can:
-	- form reports(graphs) on particular feature of the songs(acousticness, loudness, etc) on particular timerange
-	- form a playlist by searching for songs on spotify
-	- create playlist of similar and alternative songs by comparing middle characteristics of the songs in the playlist with scrabbed songs (WARNING: as it is written in pure python, the response time is very big (~30 sec/request). I am currently thinking about rewriting it in low-level language(C++ for example) to make it run faster and apply normalization techniques to produce better results)
+<br /><br />
+
+What does the <b>platform</b> can:
+* form <b>reports</b>(graphs) on <b>particular feature</b> of the songs(acousticness, loudness, etc) on <b>particular timerange</b> [example](examples/web_platform_examples/graph.jpg)
+* form a <b>playlist</b> by searching for songs on spotify [example](examples/web_platform_examples/playlist_creation.jpg)
+* create playlist of <b>similar</b> and <b>alternative</b> songs by comparing middle characteristics of the songs in the playlist with scrabbed songs [example](examples/web_platform_examples/suggestions.jpg)<br/> 
+(<b>WARNING</b>: as it is written in pure python, the response time is very big (~30 sec/request). I am currently thinking about rewriting it in low-level language(C++ for example) to make it run faster and apply normalization techniques to produce better results)
 
